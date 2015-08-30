@@ -1,0 +1,42 @@
+{
+    "name": "linkorb/scattr-client-php",
+    "description": "Scattr: client library for PHP",
+    "license": "MIT",
+    "type": "library",
+
+    "require": {
+        "php": ">=5.3",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+
+    "require-dev": {
+        "ext-curl": "*"
+    },
+
+    "keywords": [
+        "scattr",
+        "api",
+        "php",
+        "client",
+        "official",
+        "library",
+        "linkorb"
+    ],
+
+    "authors": [
+        {
+            "name":     "LinkORB Engineering",
+            "email":    "engineering@linkorb.com"
+        },
+        {
+            "name":     "Contributors",
+            "homepage": "https://github.com/linkorb/scattr-client-php/graphs/contributors"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Scattr\\Client\\": "src/"
+        }
+    }
+}
