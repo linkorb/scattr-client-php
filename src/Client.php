@@ -20,13 +20,34 @@ class Client
         $this->url = $url;
     }
     
-    public function addJob(Job $job)
+    public function pushJob(Job $job)
     {
         $data = $this->serializeJob($job);
         $this->post(
-            '/jobs/add',
+            '/jobs/push',
             $data
         );
+    }
+    
+    public function popJob()
+    {
+        $data = $this->get(
+            '/jobs/pop'
+        );
+        if (!isset($data['key'])) {
+            return null;
+        }
+        $job = $this->unserializeJob($data);
+        return $job;
+    }
+    
+    
+    public function setFinished(Job $job)
+    {
+        $data = $this->get(
+            '/jobs/' . $job->getKey() . '/finished'
+        );
+        return true;
     }
     
     public function getJobs()
@@ -42,18 +63,24 @@ class Client
     {
         $jobs = array();
         foreach ($data['items'] as $item) {
-            $job = new Job();
-            $job->setKey($item['key']);
-            $job->setClass($item['class']);
-            $job->setSubject($item['subject']);
-            $job->setParameters($item['parameters']);
-            $job->setCreatedAt($item['created_at']);
-            $job->setScheduledAt($item['scheduled_at']);
-            $job->setStartedAt($item['started_at']);
-            $job->setFinishedAt($item['finished_at']);
+            $job = $this->unserializeJob($item);
             $jobs[] = $job;
         }
         return $jobs;
+    }
+    
+    private function unserializeJob($data)
+    {
+        $job = new Job();
+        $job->setKey($data['key']);
+        $job->setClass($data['class']);
+        $job->setSubject($data['subject']);
+        $job->setParameters($data['parameters']);
+        $job->setCreatedAt($data['created_at']);
+        $job->setScheduledAt($data['scheduled_at']);
+        $job->setStartedAt($data['started_at']);
+        $job->setFinishedAt($data['finished_at']);
+        return $job;
     }
     
     private function serializeJob(Job $job)
@@ -76,7 +103,6 @@ class Client
         $url = $this->url . '/api/v1/';
         
         $url .= $this->account . $path;
-
         $res = $guzzleclient->post($url, [
             'auth' => [$this->username, $this->password],
             'headers' => ['content-type' => 'application/json'],

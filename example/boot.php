@@ -3,8 +3,6 @@
 include_once __DIR__ .'/../vendor/autoload.php';
 
 use Scattr\Client\Client;
-use Scattr\Client\Model\Job;
-
 
 $username = getenv('SCATTR_USERNAME');
 $password = getenv('SCATTR_PASSWORD');
