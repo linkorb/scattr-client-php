@@ -16,30 +16,17 @@ class Job
         $this->subject = $subject;
         return $this;
     }
-    
 
-    private $class;
     
-    public function getClass()
+    private $id;
+    public function getId()
     {
-        return $this->class;
+        return $this->id;
     }
     
-    public function setClass($class)
+    public function setId($id)
     {
-        $this->class = $class;
-        return $this;
-    }
-    
-    private $key;
-    public function getKey()
-    {
-        return $this->key;
-    }
-    
-    public function setKey($key)
-    {
-        $this->key = $key;
+        $this->id = $id;
         return $this;
     }
     
@@ -106,6 +93,32 @@ class Job
     public function setFinishedAt($finishedAt)
     {
         $this->finishedAt = $finishedAt;
+        return $this;
+    }
+
+    private $command;
+
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    public function setCommand($command)
+    {
+        $this->command = $command;
+        return $this;
+    }
+
+    private $logs;
+
+    public function getLogs()
+    {
+        return $this->logs;
+    }
+
+    public function setLogs($logs)
+    {
+        $this->logs = $logs;
         return $this;
     }
 }

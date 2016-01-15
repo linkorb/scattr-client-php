@@ -7,6 +7,7 @@ These examples assume the following three environment variables are set:
 * SCATTR_USERNAME
 * SCATTR_PASSWORD
 * SCATTR_ACCOUNT
+* SCATTR_POOLNAME
 * SCATTR_URL
 
 For example:
@@ -14,10 +15,11 @@ For example:
 export SCATTR_USERNAME="joe"
 export SCATTR_PASSWORD="secret"
 export SCATTR_ACCOUNT="test"
+export SCATTR_POOLNAME="test"
 export SCATTR_URL="http://localhost:8080"
 ```
 
 Now run the examples like this:
 ```
-php ./example/add-job.php
+php ./example/get-jobs.php
 ```
